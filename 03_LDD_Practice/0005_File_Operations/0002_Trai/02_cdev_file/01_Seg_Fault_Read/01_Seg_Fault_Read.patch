@@ -1,0 +1,48 @@
+
+# Please avoid static variable 
+
+
+[root@BeagleBone ~]# cat /dev/Infinite_first_driver 
+
+
+
+[ 5123.055058] Unhandled fault: page domain fault (0x81b) at 0xbe921c18
+[ 5123.061464] pgd = 765f8709
+[ 5123.064180] [be921c18] *pgd=9c5a3831, *pte=80fc134f, *ppte=80fc183f
+[ 5123.070486] Internal error: : 81b [#1] PREEMPT THUMB2
+[ 5123.075557] Modules linked in: first_char_driver(O)
+[ 5123.080465] CPU: 0 PID: 174 Comm: cat Tainted: G           O      4.19.103 #4
+[ 5123.087627] Hardware name: Generic AM33XX (Flattened Device Tree)
+[ 5123.093756] PC is at my_read+0xd/0x94 [first_char_driver]
+[ 5123.099183] LR is at __vfs_read+0x2d/0xf0
+[ 5123.103207] pc : [<bf8000be>]    lr : [<c024e635>]    psr: 200e0033
+[ 5123.109497] sp : c40bdec0  ip : c63458c9  fp : ffffffff
+[ 5123.114741] r10: 00001000  r9 : 00001000  r8 : c40bdf78
+[ 5123.119984] r7 : bf802004  r6 : bf8000b1  r5 : da590540  r4 : c40bdf78
+[ 5123.126537] r3 : 00000041  r2 : 00001000  r1 : be921c18  r0 : da590540
+[ 5123.133092] Flags: nzCv  IRQs on  FIQs on  Mode SVC_32  ISA Thumb  Segment none
+[ 5123.140430] Control: 50c5387d  Table: 9a530019  DAC: 00000051
+[ 5123.146199] Process cat (pid: 174, stack limit = 0xcf9bd035)
+[ 5123.151880] Stack: (0xc40bdec0 to 0xc40be000)
+[ 5123.156259] dec0: 00000000 da54dd80 00000000 c0e05088 da590540 bf8000b1 bf802004 c024e635
+[ 5123.164472] dee0: 00000000 00000000 00000000 c63458c9 da590540 c0e05088 00000001 00000000
+[ 5123.172686] df00: 00000000 00000000 00000000 c63458c9 ffffffff da590548 da597348 00020000
+[ 5123.180900] df20: ffffe000 c40bdf78 00001000 c63458c9 00000000 be921c18 da590540 ffffe000
+[ 5123.189113] df40: c40bdf78 00001000 ffffffff c024e75d 00000000 c0101224 c40bc000 da590540
+[ 5123.197327] df60: c0e05088 da590540 be921c18 00000000 00000000 c024ebc9 00000000 00000000
+[ 5123.205540] df80: 00000001 c63458c9 000caf0c 00000003 be921c18 00000003 c0101224 c40bc000
+[ 5123.213754] dfa0: 00000003 c0101001 000caf0c 00000003 00000003 be921c18 00001000 ffffffff
+[ 5123.221968] dfc0: 000caf0c 00000003 be921c18 00000003 00000001 00000000 00000001 ffffffff
+[ 5123.230181] dfe0: 00000000 be921bf4 0001c169 b6e1f018 400e0030 00000003 00000000 00000000
+[ 5123.238406] [<bf8000be>] (my_read [first_char_driver]) from [<c024e635>] (__vfs_read+0x2d/0xf0)
+[ 5123.247151] [<c024e635>] (__vfs_read) from [<c024e75d>] (vfs_read+0x65/0x100)
+[ 5123.254317] [<c024e75d>] (vfs_read) from [<c024ebc9>] (ksys_read+0x49/0x98)
+[ 5123.261314] [<c024ebc9>] (ksys_read) from [<c0101001>] (ret_fast_syscall+0x1/0x62)
+[ 5123.268912] Exception stack(0xc40bdfa8 to 0xc40bdff0)
+[ 5123.273985] dfa0:                   000caf0c 00000003 00000003 be921c18 00001000 ffffffff
+[ 5123.282199] dfc0: 000caf0c 00000003 be921c18 00000003 00000001 00000000 00000001 ffffffff
+[ 5123.290409] dfe0: 00000000 be921bf4 0001c169 b6e1f018
+[ 5123.295486] Code: f85d eb04 461c 2341 (700b) e9d4 
+[ 5123.300299] ---[ end trace b1ea82178a8d36a4 ]---
+Segmentation fault
+

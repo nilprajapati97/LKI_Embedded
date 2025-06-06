@@ -1,0 +1,42 @@
+int register_blkdev(unsigned int, const char *);
+struct request_queue *blk_init_queue(request_fn_proc *, spinlock_t *);
+alloc_disk(minors)
+void add_disk(struct gendisk *disk)
+
+struct block_device_operations {
+    int (*open) (struct block_device *, fmode_t);
+    void (*release) (struct gendisk *, fmode_t);
+    int (*rw_page)(struct block_device *, sector_t, struct page *, unsigned int);
+    int (*ioctl) (struct block_device *, fmode_t, unsigned, unsigned long);
+	int (*getgeo)(struct block_device *, struct hd_geometry *);
+}
+
+struct gendisk {
+    /* major, first_minor and minors are input parameters only,
+     * don't use directly.  Use disk_devt() and disk_max_parts().
+     */
+    int major;          /* major number of driver */
+    int first_minor;
+    int minors;                     /* maximum number of minors, =1 for
+                                         * disks that can't be partitioned. */
+
+    char disk_name[DISK_NAME_LEN];  /* name of major driver */
+    char *(*devnode)(struct gendisk *gd, umode_t *mode);
+	const struct block_device_operations *fops;
+	struct request_queue *queue;
+    void *private_data;
+}
+
+/* The request queue initialization function */
+struct request_queue *blk_init_queue(request_fn_proc *, spinlock_t *);
+/* The request queue cleanup function */
+void blk_cleanup_queue(struct request_queue *);
+/* The request (processing) function */
+void request_fn(struct request_queue *q);
+/* Fetch the request from the request queue */
+struct request *blk_fetch_request(struct request_queue *q);
+/* Macros to extract the information from the Request queue */
+rq_data_dir(req); /* Operation: 0 - read from device; otherwise - write to device */
+blk_req_pos(req); /* Starting sector to process */
+blk_req_sectors(req); /* Total sectors to process */
+rq_for_each_segment(bv, req, iter) /* Iterator to extract individual buffers */

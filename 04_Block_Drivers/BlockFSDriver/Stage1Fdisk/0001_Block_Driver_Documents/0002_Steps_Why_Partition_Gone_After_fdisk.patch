@@ -1,0 +1,117 @@
+#Not able to mount by direct
+#But using mkfs.vfat we can mount
+#gone partition after fdisk
+##################################################################################
+
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ cp rd.img rd.img1
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ sudo mount rd.img /mnt/
+mount: /mnt: wrong fs type, bad option, bad superblock on /dev/loop32, missing codepage or helper program, or other error.
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ sudo mount rd.img1 /mnt/
+mount: /mnt: wrong fs type, bad option, bad superblock on /dev/loop32, missing codepage or helper program, or other error.
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ mkfs.vfat rd.img1
+mkfs.fat 4.1 (2017-01-24)
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ sudo mount rd.img1 /mnt
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.6G     0  3.6G   0% /dev
+tmpfs           729M  2.2M  727M   1% /run
+/dev/nvme0n1p6   98G   67G   27G  72% /
+tmpfs           3.6G     0  3.6G   0% /dev/shm
+tmpfs           5.0M  8.0K  5.0M   1% /run/lock
+tmpfs           3.6G     0  3.6G   0% /sys/fs/cgroup
+/dev/loop0      128K  128K     0 100% /snap/bare/5
+/dev/loop1       56M   56M     0 100% /snap/core18/2253
+/dev/loop2       56M   56M     0 100% /snap/core18/2284
+/dev/loop3       37M   37M     0 100% /snap/gh/479
+/dev/loop4       62M   62M     0 100% /snap/core20/1328
+/dev/loop6      130M  130M     0 100% /snap/slack/49
+/dev/loop5      165M  165M     0 100% /snap/gnome-3-28-1804/161
+/dev/loop7      111M  111M     0 100% /snap/core/12603
+/dev/loop8      6.4M  6.4M     0 100% /snap/curl/623
+/dev/loop9       51M   51M     0 100% /snap/snap-store/547
+/dev/loop10      55M   55M     0 100% /snap/snap-store/558
+/dev/loop11      62M   62M     0 100% /snap/core20/1270
+/dev/loop12      44M   44M     0 100% /snap/snapd/14295
+/dev/loop13     219M  219M     0 100% /snap/gnome-3-34-1804/77
+/dev/loop14      44M   44M     0 100% /snap/snapd/14549
+/dev/loop15     323M  323M     0 100% /snap/wine-platform-6-stable/14
+/dev/loop16     219M  219M     0 100% /snap/gnome-3-34-1804/72
+/dev/loop17      37M   37M     0 100% /snap/gh/470
+/dev/loop18     5.8M  5.8M     0 100% /snap/notepad-plus-plus/340
+/dev/loop19     6.0M  6.0M     0 100% /snap/notepad-plus-plus/335
+/dev/loop20     218M  218M     0 100% /snap/code/85
+/dev/loop21     248M  248M     0 100% /snap/gnome-3-38-2004/87
+/dev/loop22     296M  296M     0 100% /snap/vlc/2344
+/dev/loop23     347M  347M     0 100% /snap/wine-platform-runtime/283
+/dev/loop24      15M   15M     0 100% /snap/universal-ctags/749
+/dev/loop25      66M   66M     0 100% /snap/gtk-common-themes/1519
+/dev/loop26     348M  348M     0 100% /snap/wine-platform-runtime/282
+/dev/loop27      88M   88M     0 100% /snap/teams-for-linux/205
+/dev/loop28      88M   88M     0 100% /snap/teams-for-linux/221
+/dev/loop29      66M   66M     0 100% /snap/gtk-common-themes/1515
+/dev/loop30     100M  100M     0 100% /snap/core/11993
+/dev/nvme0n1p1  256M   70M  187M  28% /boot/efi
+tmpfs           729M   56K  729M   1% /run/user/1000
+/dev/loop32    1004K     0 1004K   0% /mnt
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ sudo touch /mnt/b
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ sudo vi /mnt/b
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.6G     0  3.6G   0% /dev
+tmpfs           729M  2.2M  727M   1% /run
+/dev/nvme0n1p6   98G   67G   27G  72% /
+tmpfs           3.6G     0  3.6G   0% /dev/shm
+tmpfs           5.0M  8.0K  5.0M   1% /run/lock
+tmpfs           3.6G     0  3.6G   0% /sys/fs/cgroup
+/dev/loop0      128K  128K     0 100% /snap/bare/5
+/dev/loop1       56M   56M     0 100% /snap/core18/2253
+/dev/loop2       56M   56M     0 100% /snap/core18/2284
+/dev/loop3       37M   37M     0 100% /snap/gh/479
+/dev/loop4       62M   62M     0 100% /snap/core20/1328
+/dev/loop6      130M  130M     0 100% /snap/slack/49
+/dev/loop5      165M  165M     0 100% /snap/gnome-3-28-1804/161
+/dev/loop7      111M  111M     0 100% /snap/core/12603
+/dev/loop8      6.4M  6.4M     0 100% /snap/curl/623
+/dev/loop9       51M   51M     0 100% /snap/snap-store/547
+/dev/loop10      55M   55M     0 100% /snap/snap-store/558
+/dev/loop11      62M   62M     0 100% /snap/core20/1270
+/dev/loop12      44M   44M     0 100% /snap/snapd/14295
+/dev/loop13     219M  219M     0 100% /snap/gnome-3-34-1804/77
+/dev/loop14      44M   44M     0 100% /snap/snapd/14549
+/dev/loop15     323M  323M     0 100% /snap/wine-platform-6-stable/14
+/dev/loop16     219M  219M     0 100% /snap/gnome-3-34-1804/72
+/dev/loop17      37M   37M     0 100% /snap/gh/470
+/dev/loop18     5.8M  5.8M     0 100% /snap/notepad-plus-plus/340
+/dev/loop19     6.0M  6.0M     0 100% /snap/notepad-plus-plus/335
+/dev/loop20     218M  218M     0 100% /snap/code/85
+/dev/loop21     248M  248M     0 100% /snap/gnome-3-38-2004/87
+/dev/loop22     296M  296M     0 100% /snap/vlc/2344
+/dev/loop23     347M  347M     0 100% /snap/wine-platform-runtime/283
+/dev/loop24      15M   15M     0 100% /snap/universal-ctags/749
+/dev/loop25      66M   66M     0 100% /snap/gtk-common-themes/1519
+/dev/loop26     348M  348M     0 100% /snap/wine-platform-runtime/282
+/dev/loop27      88M   88M     0 100% /snap/teams-for-linux/205
+/dev/loop28      88M   88M     0 100% /snap/teams-for-linux/221
+/dev/loop29      66M   66M     0 100% /snap/gtk-common-themes/1515
+/dev/loop30     100M  100M     0 100% /snap/core/11993
+/dev/nvme0n1p1  256M   70M  187M  28% /boot/efi
+tmpfs           729M   56K  729M   1% /run/user/1000
+/dev/loop32    1004K  2.0K 1002K   1% /mnt
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ ls /mnt
+b
+infinite@annu:~/Linux_Drivers/Block_Driver/BlockFSDriver/Stage1Fdisk$ fdisk rd.img1
+
+Welcome to fdisk (util-linux 2.34).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help): p
+Disk rd.img1: 1 MiB, 1048576 bytes, 2048 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+
+Command (m for help):
